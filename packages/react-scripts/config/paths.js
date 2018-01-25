@@ -65,7 +65,8 @@ module.exports = {
   servedPath: getServedPath(resolveApp('package.json')),
 };
 
-let checkForMonorepo = true;
+const checkForMonorepo =
+  appDirectory !== fs.realpathSync(path.join(__dirname, '..'));
 
 // @remove-on-eject-begin
 const resolveOwn = relativePath => path.resolve(__dirname, '..', relativePath);
@@ -91,12 +92,7 @@ module.exports = {
 };
 
 // detect if template should be used, ie. when cwd is react-scripts itself
-const useTemplate =
-  appDirectory === fs.realpathSync(path.join(__dirname, '..'));
-
-checkForMonorepo = !useTemplate;
-
-if (useTemplate) {
+if (!checkForMonorepo) {
   module.exports = {
     dotenv: resolveOwn('template/.env'),
     appPath: resolveApp('.'),
