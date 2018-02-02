@@ -43,6 +43,13 @@ module.exports = function(
     eject: 'react-scripts eject',
   };
 
+  if (useYarn) {
+    appPackage.scripts = Object.assign(appPackage.scripts, {
+      preinstall:
+        'node -e \'if(process.env.npm_config_git) throw "Use yarn: https://bit.ly/CRA-yarn"\'',
+    });
+  }
+
   fs.writeFileSync(
     path.join(appPath, 'package.json'),
     JSON.stringify(appPackage, null, 2)
