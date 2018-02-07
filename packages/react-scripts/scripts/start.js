@@ -19,6 +19,9 @@ process.on('unhandledRejection', err => {
   throw err;
 });
 
+const verifyPackageManagerUsage = require('./utils/verifyPackageManagerUsage');
+verifyPackageManagerUsage();
+
 // Ensure environment variables are read.
 require('../config/env');
 // @remove-on-eject-begin
@@ -69,7 +72,9 @@ if (process.env.HOST) {
   console.log(
     `If this was unintentional, check that you haven't mistakenly set it in your shell.`
   );
-  console.log(`Learn more here: ${chalk.yellow('http://bit.ly/CRA-advanced-config')}`);
+  console.log(
+    `Learn more here: ${chalk.yellow('http://bit.ly/CRA-advanced-config')}`
+  );
   console.log();
 }
 

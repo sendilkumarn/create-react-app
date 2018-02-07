@@ -19,6 +19,9 @@ process.on('unhandledRejection', err => {
   throw err;
 });
 
+const verifyPackageManagerUsage = require('./utils/verifyPackageManagerUsage');
+verifyPackageManagerUsage();
+
 // Ensure environment variables are read.
 require('../config/env');
 // @remove-on-eject-begin
